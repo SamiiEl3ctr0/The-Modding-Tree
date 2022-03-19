@@ -1,12 +1,12 @@
 let modInfo = {
-	name: "The ??? Tree",
+	name: "The Existence Tree",
 	id: "mymod",
-	author: "nobody",
+	author: "SamiiEl3ctr0",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
-	discordName: "",
-	discordLink: "",
+	discordName: "hello",
+	discordLink: "google.com",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
@@ -14,7 +14,7 @@ let modInfo = {
 // Set your version in num and name
 let VERSION = {
 	num: "0.0",
-	name: "Literally nothing",
+	name: "E",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -22,7 +22,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Added things.<br>
 		- Added stuff.`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `Congratulations! You have existed!`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -41,8 +41,10 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
+		
 	let gain = new Decimal(1)
+	if (hasUpgrade('e', 11)) gain = gain.times(2)
+	if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12))
 	return gain
 }
 
@@ -56,7 +58,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.points.gte(new Decimal("e10"))
 }
 
 

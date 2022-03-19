@@ -14,7 +14,8 @@ addLayer("e", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.333, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+         let mult = new Decimal(1)
+        if (hasUpgrade('e', 13)) mult = mult.times(upgradeEffect('e', 13))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -24,5 +25,30 @@ addLayer("e", {
     hotkeys: [
         {key: "E", description: "E: Reset for existence points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    upgrades: {
+        11: {
+        title: "Exist once.",
+        description: "Multiply points by 2",
+        cost: new Decimal(2),
+        },
+        12: {
+            title: "Exist twice.",
+            description: "Multiply points based on existence points.",
+            cost: new Decimal(5),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.75)
+            },
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        13: {
+            title: "Exist more.",
+            description: "Multiply existence points based on points",
+            cost: new Decimal(10),
+            effect() {
+                return player.points.add(1).pow(0.15)
+            },
+        },
+        effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+    },
     layerShown(){return true}
 })
