@@ -19,8 +19,8 @@ let VERSION = {
 
 let changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+		- Added Existence points.<br>
+		- Added points and upgrades.`
 
 let winText = `Congratulations! You have existed!`
 
